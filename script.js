@@ -65,7 +65,6 @@ const getData = async function() {
             updateBoard(data, 'monthly', monthlyCurrentsArray, monthlyPreviousArray)
         })
 
-        console.log(dailyCurrentsArray, dailyPreviousArray);
         day.addEventListener('click', function() {
             switchData(dailyCurrentsArray, dailyPreviousArray)
         })
