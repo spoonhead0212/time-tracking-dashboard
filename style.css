@@ -1,7 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+    --font-fam: "Rubik", sans-serif;
+    --white: #FFFFFF;
+    --Blue: hsl(246, 80%, 60%);
+    --Light-red-work: hsl(15, 100%, 70%);
+    --Soft-blue-play: hsl(195, 74%, 62%);
+    --Light-red-study: hsl(348, 100%, 68%);
+    --Lime-green-exercise: hsl(145, 58%, 55%);
+    --Violet-social: hsl(264, 64%, 52%);
+    --Soft-orange-self-care: hsl(43, 84%, 65%);
+    --Very-dark-blue: hsl(226, 43%, 10%);
+    --Dark-blue: hsl(235, 46%, 20%);
+    --Desaturated-blue: hsl(235, 45%, 61%);
+    --Pale-Blue: hsl(236, 100%, 87%);
+    --Font-size: 18px;
+    --weight300: 300;
+    --weight400: 400;
+    --weight500: 500;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+body {
+    font-family: var(--font-fam);
 }
 
 main {
@@ -9,20 +35,190 @@ main {
     height: 100vh;
     display: grid;
     place-items: center;
+    background-color: var(--Very-dark-blue);
 }
 
 .dashboard {
     display: flex;
-    width: clamp(300px, 75vw, 800px);
+    gap: 1rem;
+    width: clamp(270px, 90vw, 1000px);
 }
 
 .owner {
-    flex-basis: 20%;
+    flex-basis: 25%;
 }
 
 .details {
     flex-grow: 1;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: repeat(2, 1fr);
     gap: 1rem;
+}
+
+.flex-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flexed-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.owner {
+    background-color: var(--Dark-blue);
+    border-radius: .75rem;
+}
+
+.user {
+    background-color: var(--Blue);
+    border-radius: .85rem;
+    padding: 1.5rem 0 3rem 1.5rem;
+}
+
+.img-border {
+    border: 3px solid var(--Pale-Blue);
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+}
+
+.report {
+    font-size: 12px;
+    color: var(--Pale-Blue);
+    margin-bottom: .5rem;
+}
+
+.owner-name {
+    color: var(--white);
+    font-size: 35px;
+    font-weight: var(--weight300);
+}
+
+.duration-wrap {
+    padding: 1.5rem;
+}
+
+.duration-wrap li{
+    list-style-type: none;
+    width: 100px;
+    margin-bottom: 1rem;
+    color: var(--Pale-Blue);
+}
+
+.duration-wrap li:hover {
+    color: var(--white);
+}
+
+.time_details {
+    background-color: var(--Dark-blue);
+    padding: 1rem;
+    border-radius: .85rem;
+    flex-grow: 1;
+}
+
+.title p {
+    color: var(--white);
+}
+
+.time_current {
+    font-size: 35px;
+    color: var(--white);
+    margin-block: 1.5rem .5rem;
+}
+
+.time_last {
+    color: var(--Pale-Blue);
+}
+
+.bg {
+    flex-basis: 20%;
+}
+
+.dashboard_routine {
+    border-radius: .85rem;
+    background-repeat: no-repeat;
+    background-position: top right 10px;
+    background-size: 50px;
+}
+
+.box-0 {
+    background-color: var(--Light-red-work);
+    background-image: url(images/icon-work.svg);
+}
+.box-1 {
+    background-color: var(--Soft-blue-play);
+    background-image: url(images/icon-play.svg);
+}
+.box-2 {
+    background-color: var(--Light-red-study);
+    background-image: url(images/icon-study.svg);
+}
+.box-3 {
+    background-color: var(--Lime-green-exercise);
+    background-image: url(images/icon-exercise.svg);
+}
+.box-4 {
+    background-color: var(--Violet-social);
+    background-image: url(images/icon-social.svg);
+}
+.box-5 {
+    background-color: var(--Soft-orange-self-care);
+    background-image: url(images/icon-self-care.svg);
+}
+
+@media (width < 807px) {
+    main {
+        height: unset;
+        padding-bottom: 2rem;
+    }
+    .time {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .time_current {
+            font-size: var(--Font-size);
+            font-weight: var(--weight300);
+            margin: unset;
+        }
+
+        .time_last {
+            font-size: 12px;
+        }
+    }
+
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .user {
+        display: flex;
+        align-items: center;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
+    .title {
+        margin-bottom: .5rem;
+    }
+
+    .img-border {
+        margin: unset;
+    }
+
+    .owner-name {
+        font-size: var(--Font-size);
+    }
+}
+
+@media (width < 400px) {
+    .duration-wrap li {
+        display: inline;
+        margin-right: .5rem;
+    }
 }

@@ -5,14 +5,14 @@ const week = document.querySelector('.week')
 const month = document.querySelector('.month')
 
 
-const displayElement = function(data, period) {
+const displayElement = function(data, period, index) {
     const elements = `
-        <div class="dashboard_routine">
+        <div class="dashboard_routine flexed-column box-${index}">
           <div class="bg"></div>
-          <div>
-            <div class="title">
+          <div class="time_details">
+            <div class="title flex-row">
               <p class="title_activity">${data.title}</p>
-              <p>...</p>
+              <p class="dot">...</p>
             </div>
             <div class="time">
               <p class="time_current">${data.timeframes[period].current}hrs</p>
@@ -35,8 +35,13 @@ const switchData = function(data, data2) {
     data2.forEach((currTime, i) => {
         lastTime[i].textContent = `Last week - ${currTime}hrs`;
     })
+}
 
-    
+const updateBoard = function(data, duration, dayCurrent, dayPrevious) {
+    const a = data.timeframes[duration].current
+    const b = data.timeframes[duration].previous
+    dayCurrent.push(a)
+    dayPrevious.push(b)
 }
 
 const dailyCurrentsArray = []
@@ -45,28 +50,21 @@ const weeklyCurrentsArray = []
 const weeklyPreviousArray = []
 const monthlyCurrentsArray = []
 const monthlyPreviousArray = []
+
 const getData = async function() {
     try {
         const response = await fetch('/data.json')
         const datas = await response.json()
-        datas.forEach((data, i) => {
-            const a = data.timeframes.daily.current
-            const b = data.timeframes.daily.previous
-            displayElement(data, 'daily')
-            dailyCurrentsArray.push(a)
-            dailyPreviousArray.push(b)
+        datas.forEach((data, index) => {
+            displayElement(data, 'daily', index)
 
-            const c = data.timeframes.weekly.current
-            const d = data.timeframes.weekly.previous
-            weeklyCurrentsArray.push(c)
-            weeklyPreviousArray.push(d)
+            updateBoard(data, 'daily', dailyCurrentsArray, dailyPreviousArray)
 
-            const e = data.timeframes.monthly.current
-            const f = data.timeframes.monthly.previous
-            monthlyCurrentsArray.push(e)
-            monthlyPreviousArray.push(f)
-            
+            updateBoard(data, 'weekly', weeklyCurrentsArray, weeklyPreviousArray)
+
+            updateBoard(data, 'monthly', monthlyCurrentsArray, monthlyPreviousArray)
         })
+
         console.log(dailyCurrentsArray, dailyPreviousArray);
         day.addEventListener('click', function() {
             switchData(dailyCurrentsArray, dailyPreviousArray)
@@ -79,6 +77,7 @@ const getData = async function() {
         month.addEventListener('click', function() {
             switchData(monthlyCurrentsArray, monthlyPreviousArray)
         })
+
     } catch (error) {
         console.error(error.message);
     }
