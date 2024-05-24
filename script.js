@@ -53,7 +53,7 @@ const monthlyPreviousArray = []
 
 const getData = async function() {
     try {
-        const response = await fetch('/data.json')
+        const response = await fetch('data.json')
         const datas = await response.json()
         datas.forEach((data, index) => {
             displayElement(data, 'daily', index)
